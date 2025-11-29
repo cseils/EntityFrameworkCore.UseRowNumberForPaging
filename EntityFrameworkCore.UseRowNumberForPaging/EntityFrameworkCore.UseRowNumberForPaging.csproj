@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 		<Version>0.7</Version>
 		<Authors>Rwing</Authors>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/Rwing/EntityFrameworkCore.UseRowNumberForPaging</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/Rwing/EntityFrameworkCore.UseRowNumberForPaging</PackageProjectUrl>
-		<Description>Bring back support for UseRowNumberForPaging in EntityFrameworkCore 9.0/8.0. Use a ROW_NUMBER() in queries instead of OFFSET/FETCH. This method is backwards-compatible to SQL Server 2005.</Description>
+		<Description>Bring back support for UseRowNumberForPaging in EntityFrameworkCore 10.0/9.0/8.0. Use a ROW_NUMBER() in queries instead of OFFSET/FETCH. This method is backwards-compatible to SQL Server 2005.</Description>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -30,6 +30,10 @@
 	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\LICENSE">
