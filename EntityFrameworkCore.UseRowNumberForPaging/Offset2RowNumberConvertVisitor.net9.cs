@@ -30,7 +30,12 @@ internal class Offset2RowNumberConvertVisitor(
         // if we have no offset, we do not need to use ROW_NUMBER for offset calculations
         if (selectExpression.Offset == null)
         {
+#if NET10_0_OR_GREATER
+            // still visit children to catch offsets in nested subqueries
+            return (SelectExpression)base.VisitExtension(selectExpression);
+#else
             return selectExpression;
+#endif
         }
         var isRootQuery = selectExpression == root;
 
@@ -41,6 +46,7 @@ internal class Offset2RowNumberConvertVisitor(
 
         // remove offset and limit by creating new select expression from old one
         // we can't use SelectExpression.Update because that breaks PushDownIntoSubquery
+        #pragma warning disable EF1001
         var enhancedSelect = new SelectExpression(
             alias: null,
             tables: new(selectExpression.Tables),
