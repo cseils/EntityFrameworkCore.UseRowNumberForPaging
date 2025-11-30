@@ -52,7 +52,7 @@ internal class Offset2RowNumberConvertVisitor : ExpressionVisitor
     {
         var oldOffset = selectExpression.Offset;
         if (oldOffset == null)
-            return selectExpression;
+            return base.VisitExtension(selectExpression);
         var oldLimit = selectExpression.Limit;
         var oldOrderings = selectExpression.Orderings;
         var newOrderings = oldOrderings.Count > 0 && (oldLimit != null || selectExpression == root)
