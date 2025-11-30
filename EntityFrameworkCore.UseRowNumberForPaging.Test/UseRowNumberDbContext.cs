@@ -8,6 +8,7 @@ public class UseRowNumberDbContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Author> Authors { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -22,11 +23,19 @@ public class Blog
     public string Url { get; set; }
     public int Rating { get; set; }
     public virtual Author Author { get; set; }
+    public virtual Category Category { get; set; }
 }
 public class Author
 {
     public int AuthorId { get; set; }
     public string Name { get; set; }
     public DateOnly ContributingSince { get; set; }
+    public virtual List<Blog> Blogs { get; set; }
+}
+
+public class Category
+{
+    public int CategoryId { get; set; }
+    public string Name { get; set; }
     public virtual List<Blog> Blogs { get; set; }
 }
